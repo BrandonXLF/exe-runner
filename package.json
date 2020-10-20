@@ -1,0 +1,80 @@
+{
+	"name": "exe-runner",
+	"displayName": "exe Runner",
+	"description": "Run .exe files directly from Visual Studio Code",
+	"publisher": "brandonfowler",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/BrandonXLF/exe-runner"
+	},
+	"homepage": "https://github.com/BrandonXLF/exe-runner",
+	"bugs": {
+		"url": "https://github.com/BrandonXLF/exe-runner/issues"
+	},
+	"icon": "media/icon.png",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.50.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"keywords": [
+		"exe",
+		"executable"
+	],
+	"activationEvents": [
+		"onCommand:exe-runner.run"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "exe-runner.run",
+				"title": "Run Executable",
+				"icon": {
+					"light": "media/light.svg",
+					"dark": "media/dark.svg"
+				}
+			}
+		],
+		"menus": {
+			"editor/title": [
+				{
+					"command": "exe-runner.run",
+					"group": "navigation",
+					"when": "resourceExtname == .exe"
+				}
+			],
+			"explorer/context": [
+				{
+					"command": "exe-runner.run",
+					"group": "navigation",
+					"when": "!explorerResourceIsFolder && resourceExtname == .exe"
+				}
+			],
+			"editor/context": [
+				{
+					"command": "exe-runner.run",
+					"group": "navigation",
+					"when": "resourceExtname == .exe"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint src --ext ts",
+		"watch": "tsc -watch -p ./"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.50.0",
+		"@types/node": "^12.11.7",
+		"eslint": "^7.9.0",
+		"@typescript-eslint/eslint-plugin": "^4.1.1",
+		"@typescript-eslint/parser": "^4.1.1",
+		"typescript": "^4.0.2"
+	}
+}
