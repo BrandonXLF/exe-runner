@@ -3,6 +3,7 @@
 ## 0.2.0
 
 - Optimized code
+- exe Runner terminal is only discarded when it is closed, rather than any terminal
 
 ## 0.1.0
 

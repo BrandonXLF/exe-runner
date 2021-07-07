@@ -18,6 +18,10 @@ export function activate(context: vscode.ExtensionContext) {
 		terminal.show();
 		terminal.sendText(`${isWin ? '' : 'wine '}"${filePath}"`);
 
-		vscode.window.onDidCloseTerminal(() => terminal = undefined);
+		vscode.window.onDidCloseTerminal(closedTerminal => {
+			if (closedTerminal === terminal) {
+				terminal = undefined;
+			}
+		});
 	}));
 }
