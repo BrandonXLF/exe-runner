@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.2.0
+
+- Optimized code
+
 ## 0.1.0
 
 - Terminal always uses cmd.exe on windows
