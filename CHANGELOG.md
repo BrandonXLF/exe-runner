@@ -4,6 +4,7 @@
 
 - Optimized code
 - exe Runner terminal is only discarded when it is closed, rather than any terminal
+- "Run Executable" added to editor tab context menu
 
 ## 0.1.0
 

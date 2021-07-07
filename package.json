@@ -47,6 +47,13 @@
 					"when": "resourceExtname == .exe"
 				}
 			],
+			"editor/title/context": [
+				{
+					"command": "exe-runner.run",
+					"group": "navigation",
+					"when": "resourceExtname == .exe"
+				}
+			],
 			"explorer/context": [
 				{
 					"command": "exe-runner.run",
