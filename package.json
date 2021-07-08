@@ -13,7 +13,7 @@
 		"url": "https://github.com/BrandonXLF/exe-runner/issues"
 	},
 	"icon": "media/icon.png",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"engines": {
 		"vscode": "^1.14.0"
 	},
@@ -40,6 +40,12 @@
 			}
 		],
 		"menus": {
+			"commandPalette": [
+				{
+					"command": "exe-runner.run",
+					"when": "resourceExtname == .exe"
+				}
+			],
 			"editor/title": [
 				{
 					"command": "exe-runner.run",
@@ -58,7 +64,7 @@
 				{
 					"command": "exe-runner.run",
 					"group": "navigation",
-					"when": "!explorerResourceIsFolder && resourceExtname == .exe"
+					"when": "resourceExtname == .exe"
 				}
 			],
 			"editor/context": [
