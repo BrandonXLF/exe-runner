@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.2.1
+
+- "Run Executable" now works as expected from the command palette
+
 ## 0.2.0
 
 - Optimized code
