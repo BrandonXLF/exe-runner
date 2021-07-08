@@ -8,14 +8,14 @@ export function activate(context: vscode.ExtensionContext) {
 		// Fallback to active editor for command palette
 		fileUri = fileUri || vscode.window.activeTextEditor?.document.uri;
 
-		// Handle unsaved editors, remote editors etc.
+		// Handle remote editors
 		if (!fileUri || fileUri.scheme !== 'file') {
 			vscode.window.showErrorMessage('Selected file is an invalid local file.');
 			return;
 		}
 
-		let filePath = fileURLToPath(fileUri.toString());
-		let isWin = process.platform === 'win32';
+		let filePath = fileURLToPath(fileUri.toString()),
+			isWin = process.platform === 'win32';
 
 		// Create the terminal and show it
 		terminal = terminal || vscode.window.createTerminal('exe Runner', isWin ? 'C:\\Windows\\System32\\cmd.exe' : undefined);
