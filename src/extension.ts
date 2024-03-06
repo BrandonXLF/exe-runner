@@ -17,8 +17,8 @@ export function activate(context: vscode.ExtensionContext) {
 		const filePath = fileURLToPath(fileUri.toString()),
 			isWin = process.platform === 'win32';
 
-		// Create the terminal and show it
-		terminal = terminal || vscode.window.createTerminal('exe Runner', isWin ? 'C:\\Windows\\System32\\cmd.exe' : undefined);
+		// Reuse the previous terminal if it exists
+		terminal = terminal ?? vscode.window.createTerminal('exe Runner');
 		terminal.show();
 		terminal.sendText(`${isWin ? '' : 'wine '}"${filePath}"`);
 
