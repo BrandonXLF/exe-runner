@@ -1,10 +1,13 @@
 import * as vscode from 'vscode';
 import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 let terminal: vscode.Terminal | undefined;
 
 export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.commands.registerCommand('exe-runner.run', (fileUri: vscode.Uri) => {
+		const config = vscode.workspace.getConfiguration('exeRunner');
+
 		// Fallback to active editor for command palette
 		fileUri = fileUri || vscode.window.activeTextEditor?.document.uri;
 
@@ -20,7 +23,19 @@ export function activate(context: vscode.ExtensionContext) {
 		// Reuse the previous terminal if it exists
 		terminal = terminal ?? vscode.window.createTerminal('exe Runner');
 		terminal.show();
-		terminal.sendText(`${isWin ? '' : 'wine '}"${filePath}"`);
+
+		let command = '';
+
+		if (config.get('runInFileDirectory')) {
+			const directory = dirname(filePath);
+			command += `cd "${directory}" && `;
+		}
+
+		if (!isWin) {
+			command += 'wine ';
+		}
+
+		terminal.sendText(`${command}"${filePath}"`);
 
 		// Unset the terminal variable when the terminal is closed
 		vscode.window.onDidCloseTerminal(closedTerminal => {

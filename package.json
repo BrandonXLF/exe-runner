@@ -39,6 +39,16 @@
 				}
 			}
 		],
+		"configuration": {
+			"title": "exe Runner",
+			"properties": {
+				"exeRunner.runInFileDirectory": {
+					"type": "boolean",
+					"default": false,
+					"description": "Run executables with the CWD set to the directory they are located in."
+				}
+			}
+		},
 		"menus": {
 			"commandPalette": [
 				{
