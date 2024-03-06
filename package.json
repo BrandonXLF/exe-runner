@@ -51,6 +51,11 @@
 					"type": "boolean",
 					"default": false,
 					"description": "Clear the terminal before each exe execution."
+				},
+				"exeRunner.compatibilityLayer": {
+					"type": "string",
+					"default": "wine",
+					"description": "Compatibility layer to use on non-Windows platforms."
 				}
 			}
 		},

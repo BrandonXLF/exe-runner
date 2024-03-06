@@ -37,7 +37,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 
 		if (!isWin) {
-			command += 'wine ';
+			command += config.get('compatibilityLayer') + ' ';
 		}
 
 		terminal.sendText(`${command}"${filePath}"`);
