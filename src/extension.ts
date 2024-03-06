@@ -14,7 +14,7 @@ export function activate(context: vscode.ExtensionContext) {
 			return;
 		}
 
-		let filePath = fileURLToPath(fileUri.toString()),
+		const filePath = fileURLToPath(fileUri.toString()),
 			isWin = process.platform === 'win32';
 
 		// Create the terminal and show it
