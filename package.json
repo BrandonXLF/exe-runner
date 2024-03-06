@@ -13,7 +13,7 @@
 		"url": "https://github.com/BrandonXLF/exe-runner/issues"
 	},
 	"icon": "media/icon.png",
-	"version": "0.2.1",
+	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.14.0"
 	},
