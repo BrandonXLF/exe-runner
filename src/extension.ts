@@ -5,6 +5,9 @@ import { dirname } from 'path';
 let terminal: vscode.Terminal | undefined;
 
 export function activate(context: vscode.ExtensionContext) {
+	// Restore persistence terminal
+	terminal = vscode.window.terminals.find(term => term.name === 'exe Runner');
+
 	context.subscriptions.push(vscode.commands.registerCommand('exe-runner.run', (fileUri: vscode.Uri) => {
 		const config = vscode.workspace.getConfiguration('exeRunner');
 
