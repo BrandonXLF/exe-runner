@@ -1,14 +1,14 @@
 # exe Runner
 
-**exe Runner** is an Visual Studio Code extension that allows you to easily run `.exe` files.
+Easily run `.exe` files in the Visual Studio Code terminal. Uses a compatibility layer, such as `wine`, on non-Windows platforms.
 
 ## Features
 
-* Run `.exe` files by clicking button right of the tab bar
-* Run `.exe` files from the editor tab context menu for `.exe` files
-* Run `.exe` files from the file explorer context menu for `.exe` files
-* Run `.exe` files from the editor context menu for `.exe` files
-* Use the command `Run Executable` to run `.exe` files
+* Run the current `.exe` file by clicking the button right of the tab bar
+* Run any `.exe` files from their file, editor tab, and editor context menus
+* Run the current `.exe` with the command `Run Executable`
+* On non-Windows platforms, invoke a compatibility layer, such as `wine`, to run `.exe` files
+* Options to clear previous output and to run `.exe` files from their directory
 
 ## Example
 
