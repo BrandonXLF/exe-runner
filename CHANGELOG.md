@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.0.0
+
+- No longer force the use of `cmd.exe` on windows when creating the terminal
+- Added an option to run `.exe` files in the directory they are located in (`exeRunner.runInFileDirectory`)
+- Added an option to clear the terminal before each run (`exeRunner.clearTerminal`)
+- Added an option to customize the compatibility layer used in non-Windows environments (`exeRunner.compatibilityLayer`)
+- Reuse persistent terminals when `terminal.integrated.enablePersistentSessions` is enabled
+
 ## 0.2.1
 
 - "Run Executable" now works as expected from the command palette
