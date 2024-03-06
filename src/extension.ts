@@ -22,6 +22,11 @@ export function activate(context: vscode.ExtensionContext) {
 
 		// Reuse the previous terminal if it exists
 		terminal = terminal ?? vscode.window.createTerminal('exe Runner');
+
+		if (config.get('clearTerminal')) {
+			terminal.sendText(isWin ? 'cls' : 'clear');
+		}
+
 		terminal.show();
 
 		let command = '';

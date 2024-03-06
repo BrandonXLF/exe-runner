@@ -46,6 +46,11 @@
 					"type": "boolean",
 					"default": false,
 					"description": "Run executables with the CWD set to the directory they are located in."
+				},
+				"exeRunner.clearTerminal": {
+					"type": "boolean",
+					"default": false,
+					"description": "Clear the terminal before each exe execution."
 				}
 			}
 		},
