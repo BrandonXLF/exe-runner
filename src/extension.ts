@@ -5,8 +5,6 @@ import { dirname } from 'path';
 let terminal: vscode.Terminal | undefined;
 
 function runExe(fileUri?: vscode.Uri) {
-	const config = vscode.workspace.getConfiguration('exeRunner');
-
 	// Fallback to active editor for command palette
 	fileUri = fileUri || vscode.window.activeTextEditor?.document.uri;
 
@@ -16,7 +14,8 @@ function runExe(fileUri?: vscode.Uri) {
 		return;
 	}
 
-	const filePath = fileURLToPath(fileUri.toString()),
+	const config = vscode.workspace.getConfiguration('exeRunner'),
+		filePath = fileURLToPath(fileUri.toString()),
 		isWin = process.platform === 'win32';
 
 	// Reuse the previous terminal if it exists
