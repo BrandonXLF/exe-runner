@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
 let terminal: vscode.Terminal | undefined;
+let extensionUri: vscode.Uri;
 
 function runExe(fileUri?: vscode.Uri) {
 	// Fallback to the active tab for command palette
@@ -27,8 +28,14 @@ function runExe(fileUri?: vscode.Uri) {
 		filePath = fileURLToPath(fileUri.toString()),
 		isWin = process.platform === 'win32';
 
-	// Reuse the previous terminal if it exists
-	terminal = terminal ?? vscode.window.createTerminal('exe Runner');
+	// Create a new terminal if an existing one does not exist
+	terminal = terminal ?? vscode.window.createTerminal({
+		name: 'exe Runner',
+		iconPath: {
+			light: vscode.Uri.joinPath(extensionUri, 'media', 'light.svg'),
+			dark: vscode.Uri.joinPath(extensionUri, 'media', 'dark.svg')
+		}
+	});
 
 	if (config.get('clearTerminal')) {
 		terminal.sendText(isWin ? 'cls' : 'clear');
@@ -60,6 +67,7 @@ function runExe(fileUri?: vscode.Uri) {
 export function activate(context: vscode.ExtensionContext) {
 	// Restore persistence terminal
 	terminal = vscode.window.terminals.find(term => term.name === 'exe Runner');
+	extensionUri = context.extensionUri;
 
 	context.subscriptions.push(
 		vscode.commands.registerCommand('exe-runner.run', runExe)
