@@ -5,8 +5,17 @@ import { dirname } from 'path';
 let terminal: vscode.Terminal | undefined;
 
 function runExe(fileUri?: vscode.Uri) {
-	// Fallback to active editor for command palette
-	fileUri = fileUri || vscode.window.activeTextEditor?.document.uri;
+	// Fallback to the active tab for command palette
+	if (!fileUri) {
+		const tabInput = vscode.window.tabGroups.activeTabGroup.activeTab?.input;
+
+		if (
+			tabInput instanceof vscode.TabInputText ||
+			tabInput instanceof vscode.TabInputCustom
+		) {
+			fileUri = tabInput.uri;
+		}
+	}
 
 	// Handle remote editors
 	if (!fileUri || fileUri.scheme !== 'file') {
