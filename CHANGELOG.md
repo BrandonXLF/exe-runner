@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.1.0
+
+- "Run Executable" command now works on the unsupported text encoding page
+- "exe Runner" terminal now uses a custom icon
+
 ## 1.0.0
 
 - No longer force the use of `cmd.exe` on windows when creating the terminal
