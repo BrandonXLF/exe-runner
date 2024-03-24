@@ -54,7 +54,7 @@ function runExe(fileUri?: vscode.Uri) {
 	const shellPath = terminal.creationOptions.shellPath ?? vscode.env.shell;
 
 	// Execute with the & operator when using PowerShell
-	if (shellPath.endsWith('powershell.exe')) {
+	if (isWin && (shellPath.endsWith('powershell.exe') || shellPath.endsWith('pwsh.exe'))) {
 		command += '& ';
 	} else if (!isWin) {
 		command += config.get('compatibilityLayer') + ' ';
