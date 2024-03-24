@@ -50,9 +50,11 @@ function runExe(fileUri?: vscode.Uri) {
 		command += `cd "${directory}" && `;
 	}
 
-	// Execute with the & operator when using PowerShell
 	// @ts-ignore shellPath doesn't exist on ExtensionTerminalOptions
-	if (terminal.creationOptions.shellPath?.endsWith('powershell.exe')) {
+	const shellPath = terminal.creationOptions.shellPath ?? vscode.env.shell;
+
+	// Execute with the & operator when using PowerShell
+	if (shellPath.endsWith('powershell.exe')) {
 		command += '& ';
 	} else if (!isWin) {
 		command += config.get('compatibilityLayer') + ' ';
