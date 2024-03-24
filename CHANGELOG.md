@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.1.1
+
+- Use "&" to run executables on PowerShell
+
 ## 1.1.0
 
 - "Run Executable" command now works on the unsupported text encoding page
