@@ -25,7 +25,8 @@
 		"executable"
 	],
 	"activationEvents": [
-		"onCommand:exe-runner.run"
+		"onCommand:exe-runner.run",
+		"onCommand:exe-runner.runWithFlags"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -33,6 +34,14 @@
 			{
 				"command": "exe-runner.run",
 				"title": "Run Executable",
+				"icon": {
+					"light": "media/light.svg",
+					"dark": "media/dark.svg"
+				}
+			},
+			{
+				"command": "exe-runner.runWithFlags",
+				"title": "Run Executable with Flags",
 				"icon": {
 					"light": "media/light.svg",
 					"dark": "media/dark.svg"
@@ -64,6 +73,10 @@
 				{
 					"command": "exe-runner.run",
 					"when": "resourceExtname == .exe"
+				},
+				{
+					"command": "exe-runner.runWithFlags",
+					"when": "resourceExtname == .exe"
 				}
 			],
 			"editor/title": [
@@ -78,6 +91,11 @@
 					"command": "exe-runner.run",
 					"group": "navigation",
 					"when": "resourceExtname == .exe"
+				},
+				{
+					"command": "exe-runner.runWithFlags",
+					"group": "navigation",
+					"when": "resourceExtname == .exe"
 				}
 			],
 			"explorer/context": [
@@ -85,11 +103,21 @@
 					"command": "exe-runner.run",
 					"group": "navigation",
 					"when": "resourceExtname == .exe"
+				},
+				{
+					"command": "exe-runner.runWithFlags",
+					"group": "navigation",
+					"when": "resourceExtname == .exe"
 				}
 			],
 			"editor/context": [
 				{
 					"command": "exe-runner.run",
+					"group": "navigation",
+					"when": "resourceExtname == .exe"
+				},
+				{
+					"command": "exe-runner.runWithFlags",
 					"group": "navigation",
 					"when": "resourceExtname == .exe"
 				}
