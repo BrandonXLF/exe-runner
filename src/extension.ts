@@ -19,7 +19,7 @@ async function runExe(fileUri?: vscode.Uri, withArgs = false) {
 	}
 
 	// Handle remote editors
-	if (!fileUri || fileUri.scheme !== 'file') {
+	if (fileUri?.scheme !== 'file') {
 		vscode.window.showErrorMessage('Selected file is an invalid local file.');
 		return;
 	}
@@ -43,7 +43,7 @@ async function runExe(fileUri?: vscode.Uri, withArgs = false) {
 	}
 
 	// Create a new terminal if an existing one does not exist
-	terminal = terminal ?? vscode.window.createTerminal({
+	terminal ??= vscode.window.createTerminal({
 		name: 'exe Runner',
 		iconPath: {
 			light: vscode.Uri.joinPath(extensionUri, 'media', 'light.svg'),
