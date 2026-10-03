@@ -72,16 +72,14 @@
 			"commandPalette": [
 				{
 					"command": "exe-runner.run",
-					"when": "resourceExtname == .exe"
-				},
-				{
-					"command": "exe-runner.runWithFlags",
+					"alt": "exe-runner.runWithFlags",
 					"when": "resourceExtname == .exe"
 				}
 			],
 			"editor/title": [
 				{
 					"command": "exe-runner.run",
+					"alt": "exe-runner.runWithFlags",
 					"group": "navigation",
 					"when": "resourceExtname == .exe"
 				}
@@ -89,11 +87,7 @@
 			"editor/title/context": [
 				{
 					"command": "exe-runner.run",
-					"group": "navigation",
-					"when": "resourceExtname == .exe"
-				},
-				{
-					"command": "exe-runner.runWithFlags",
+					"alt": "exe-runner.runWithFlags",
 					"group": "navigation",
 					"when": "resourceExtname == .exe"
 				}
@@ -101,11 +95,7 @@
 			"explorer/context": [
 				{
 					"command": "exe-runner.run",
-					"group": "navigation",
-					"when": "resourceExtname == .exe"
-				},
-				{
-					"command": "exe-runner.runWithFlags",
+					"alt": "exe-runner.runWithFlags",
 					"group": "navigation",
 					"when": "resourceExtname == .exe"
 				}
@@ -113,11 +103,7 @@
 			"editor/context": [
 				{
 					"command": "exe-runner.run",
-					"group": "navigation",
-					"when": "resourceExtname == .exe"
-				},
-				{
-					"command": "exe-runner.runWithFlags",
+					"alt": "exe-runner.runWithFlags",
 					"group": "navigation",
 					"when": "resourceExtname == .exe"
 				}
