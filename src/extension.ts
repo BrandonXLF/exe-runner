@@ -1,9 +1,23 @@
 import * as vscode from 'vscode';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { EOL } from 'os';
 
 let terminal: vscode.Terminal | undefined;
 let extensionUri: vscode.Uri;
+
+function getStartUpMessage(config: vscode.WorkspaceConfiguration, isWin: boolean) {
+	let msg = 'exe Runner | [Alt] to run with args | Current config:';
+
+	msg += ` Change dir? ${config.get('runInFileDirectory') ? 'Y' : 'N'}`;
+	msg += ` Clear? ${config.get('clearTerminal') ? 'Y' : 'N'}`;
+
+	if (!isWin) {
+		msg += ` Compat layer: ${config.get('compatibilityLayer')}`;
+	}
+
+	return msg + EOL;
+}
 
 async function runExe(fileUri?: vscode.Uri, withArgs = false) {
 	// Fallback to the active tab for command palette
@@ -42,18 +56,19 @@ async function runExe(fileUri?: vscode.Uri, withArgs = false) {
 		}
 	}
 
+	if (terminal && config.get('clearTerminal')) {
+		terminal.sendText(isWin ? 'cls' : 'clear');
+	}
+
 	// Create a new terminal if an existing one does not exist
 	terminal ??= vscode.window.createTerminal({
 		name: 'exe Runner',
+		message: getStartUpMessage(config, isWin),
 		iconPath: {
 			light: vscode.Uri.joinPath(extensionUri, 'media', 'light.svg'),
 			dark: vscode.Uri.joinPath(extensionUri, 'media', 'dark.svg')
 		}
 	});
-
-	if (terminal && config.get('clearTerminal')) {
-		terminal.sendText(isWin ? 'cls' : 'clear');
-	}
 
 	terminal.show();
 
