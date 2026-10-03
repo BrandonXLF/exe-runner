@@ -72,7 +72,10 @@
 			"commandPalette": [
 				{
 					"command": "exe-runner.run",
-					"alt": "exe-runner.runWithArgs",
+					"when": "resourceExtname == .exe"
+				},
+				{
+					"command": "exe-runner.runWithArgs",
 					"when": "resourceExtname == .exe"
 				}
 			],
