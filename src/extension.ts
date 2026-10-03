@@ -28,6 +28,20 @@ async function runExe(fileUri?: vscode.Uri, withArgs = false) {
 		filePath = fileURLToPath(fileUri.toString()),
 		isWin = process.platform === 'win32';
 
+	// Ask for args to append to the command
+	let args: string | undefined;
+
+	if (withArgs) {
+		args = await vscode.window.showInputBox({
+			prompt: 'Arguments to run the executable with',
+			placeHolder: '--name value -flag'
+		});
+
+		if (args === undefined) {
+			return;
+		}
+	}
+
 	// Create a new terminal if an existing one does not exist
 	terminal = terminal ?? vscode.window.createTerminal({
 		name: 'exe Runner',
@@ -42,20 +56,6 @@ async function runExe(fileUri?: vscode.Uri, withArgs = false) {
 	}
 
 	terminal.show();
-
-	// Ask for args to append to the command
-	let args: string | undefined;
-
-	if (withArgs) {
-		args = await vscode.window.showInputBox({
-			prompt: 'Arguments to run the executable with',
-			placeHolder: '--name value -flag'
-		});
-
-		if (args === undefined) {
-			return;
-		}
-	}
 
 	let command = '';
 
