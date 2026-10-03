@@ -44,13 +44,17 @@ async function runExe(fileUri?: vscode.Uri, withArgs = false) {
 	terminal.show();
 
 	// Ask for args to append to the command
-	let args = '';
+	let args: string | undefined;
 
 	if (withArgs) {
 		args = await vscode.window.showInputBox({
 			prompt: 'Arguments to run the executable with',
 			placeHolder: '--name value -flag'
-		}) ?? '';
+		});
+
+		if (args === undefined) {
+			return;
+		}
 	}
 
 	let command = '';
