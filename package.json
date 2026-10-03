@@ -25,7 +25,8 @@
 		"executable"
 	],
 	"activationEvents": [
-		"onCommand:exe-runner.run"
+		"onCommand:exe-runner.run",
+		"onCommand:exe-runner.runWithArgs"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -33,6 +34,14 @@
 			{
 				"command": "exe-runner.run",
 				"title": "Run Executable",
+				"icon": {
+					"light": "media/light.svg",
+					"dark": "media/dark.svg"
+				}
+			},
+			{
+				"command": "exe-runner.runWithArgs",
+				"title": "Run Executable With Arguments",
 				"icon": {
 					"light": "media/light.svg",
 					"dark": "media/dark.svg"
@@ -63,12 +72,14 @@
 			"commandPalette": [
 				{
 					"command": "exe-runner.run",
+					"alt": "exe-runner.runWithArgs",
 					"when": "resourceExtname == .exe"
 				}
 			],
 			"editor/title": [
 				{
 					"command": "exe-runner.run",
+					"alt": "exe-runner.runWithArgs",
 					"group": "navigation",
 					"when": "resourceExtname == .exe"
 				}
@@ -76,6 +87,7 @@
 			"editor/title/context": [
 				{
 					"command": "exe-runner.run",
+					"alt": "exe-runner.runWithArgs",
 					"group": "navigation",
 					"when": "resourceExtname == .exe"
 				}
@@ -83,6 +95,7 @@
 			"explorer/context": [
 				{
 					"command": "exe-runner.run",
+					"alt": "exe-runner.runWithArgs",
 					"group": "navigation",
 					"when": "resourceExtname == .exe"
 				}
@@ -90,6 +103,7 @@
 			"editor/context": [
 				{
 					"command": "exe-runner.run",
+					"alt": "exe-runner.runWithArgs",
 					"group": "navigation",
 					"when": "resourceExtname == .exe"
 				}

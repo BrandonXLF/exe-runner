@@ -5,7 +5,7 @@ import { dirname } from 'path';
 let terminal: vscode.Terminal | undefined;
 let extensionUri: vscode.Uri;
 
-function runExe(fileUri?: vscode.Uri) {
+async function runExe(fileUri?: vscode.Uri, withArgs = false) {
 	// Fallback to the active tab for command palette
 	if (!fileUri) {
 		const tabInput = vscode.window.tabGroups.activeTabGroup.activeTab?.input;
@@ -28,6 +28,20 @@ function runExe(fileUri?: vscode.Uri) {
 		filePath = fileURLToPath(fileUri.toString()),
 		isWin = process.platform === 'win32';
 
+	// Ask for args to append to the command
+	let args: string | undefined;
+
+	if (withArgs) {
+		args = await vscode.window.showInputBox({
+			prompt: 'Arguments to run the executable with',
+			placeHolder: '--name value -flag'
+		});
+
+		if (args === undefined) {
+			return;
+		}
+	}
+
 	// Create a new terminal if an existing one does not exist
 	terminal = terminal ?? vscode.window.createTerminal({
 		name: 'exe Runner',
@@ -37,7 +51,7 @@ function runExe(fileUri?: vscode.Uri) {
 		}
 	});
 
-	if (config.get('clearTerminal')) {
+	if (terminal && config.get('clearTerminal')) {
 		terminal.sendText(isWin ? 'cls' : 'clear');
 	}
 
@@ -60,7 +74,7 @@ function runExe(fileUri?: vscode.Uri) {
 		command += config.get('compatibilityLayer') + ' ';
 	}
 
-	terminal.sendText(`${command}"${filePath}"`);
+	terminal.sendText(`${command}"${filePath}"${args ? ' ' + args : ''}`);
 
 	// Unset the terminal variable when the terminal is closed
 	vscode.window.onDidCloseTerminal(closedTerminal => {
@@ -76,6 +90,7 @@ export function activate(context: vscode.ExtensionContext) {
 	extensionUri = context.extensionUri;
 
 	context.subscriptions.push(
-		vscode.commands.registerCommand('exe-runner.run', runExe)
+		vscode.commands.registerCommand('exe-runner.run', (fileUri?: vscode.Uri) => runExe(fileUri)),
+		vscode.commands.registerCommand('exe-runner.runWithArgs', (fileUri?: vscode.Uri) => runExe(fileUri, true))
 	);
 }
