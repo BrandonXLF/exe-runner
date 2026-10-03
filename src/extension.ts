@@ -5,7 +5,7 @@ import { dirname } from 'path';
 let terminal: vscode.Terminal | undefined;
 let extensionUri: vscode.Uri;
 
-async function runExe(fileUri?: vscode.Uri, withFlags = false) {
+async function runExe(fileUri?: vscode.Uri, withArgs = false) {
 	// Fallback to the active tab for command palette
 	if (!fileUri) {
 		const tabInput = vscode.window.tabGroups.activeTabGroup.activeTab?.input;
@@ -37,19 +37,19 @@ async function runExe(fileUri?: vscode.Uri, withFlags = false) {
 		}
 	});
 
-	if (config.get('clearTerminal')) {
+	if (terminal && config.get('clearTerminal')) {
 		terminal.sendText(isWin ? 'cls' : 'clear');
 	}
 
 	terminal.show();
 
-	// Ask for flags to append to the command
-	let flags = '';
+	// Ask for args to append to the command
+	let args = '';
 
-	if (withFlags) {
-		flags = await vscode.window.showInputBox({
-			prompt: 'Flags to run the executable with',
-			placeHolder: '--example-flag value'
+	if (withArgs) {
+		args = await vscode.window.showInputBox({
+			prompt: 'Arguments to run the executable with',
+			placeHolder: '--name value -flag'
 		}) ?? '';
 	}
 
@@ -70,7 +70,7 @@ async function runExe(fileUri?: vscode.Uri, withFlags = false) {
 		command += config.get('compatibilityLayer') + ' ';
 	}
 
-	terminal.sendText(`${command}"${filePath}"${flags ? ' ' + flags : ''}`);
+	terminal.sendText(`${command}"${filePath}"${args ? ' ' + args : ''}`);
 
 	// Unset the terminal variable when the terminal is closed
 	vscode.window.onDidCloseTerminal(closedTerminal => {
@@ -87,6 +87,6 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(
 		vscode.commands.registerCommand('exe-runner.run', (fileUri?: vscode.Uri) => runExe(fileUri)),
-		vscode.commands.registerCommand('exe-runner.runWithFlags', (fileUri?: vscode.Uri) => runExe(fileUri, true))
+		vscode.commands.registerCommand('exe-runner.runWithArgs', (fileUri?: vscode.Uri) => runExe(fileUri, true))
 	);
 }
