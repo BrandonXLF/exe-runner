@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.2.0
+
+- Added an alt command to run with arguments
+
 ## 1.1.1
 
 - Use "&" to run executables on PowerShell
