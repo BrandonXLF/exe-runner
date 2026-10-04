@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.2.1
+
+- Update readme
+
 ## 1.2.0
 
 - Added an alt command to run with arguments
